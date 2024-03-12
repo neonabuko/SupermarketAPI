@@ -1,39 +1,39 @@
 using Microsoft.AspNetCore.Mvc;
-using MVCProject.Models;
-using MVCProject.Repository;
+using MVCProject.UseCase.Interfaces;
 
 namespace MVCProject.Controllers;
 
 [ApiController]
 [Route("/categories")]
-public class CategoriesController(ICategoryRepository repository) : Controller
+public class CategoriesController(ICreateCategoryUseCase createCategoryUseCase, IDeleteCategoryUseCase deleteCategoryUseCase,
+    IUpdateCategoryUseCase updateCategoryUseCase, IGetCategoryUseCase getCategoryUseCase, IGetAllCategoriesUseCase getAllCategoriesUseCase) : Controller
 {
     [Route("/categories/index")]
-    public async Task<IActionResult> Index()
+    public Task<IActionResult> Index()
     {
-        var categories = (await repository.GetAllAsync()).Select(category => category).ToList();
-        return View(categories);
+        var categories = getAllCategoriesUseCase.GetAll().Result;
+        return Task.FromResult<IActionResult>(View(categories));
     }
     
     public async Task<IActionResult> Edit(int? id)
     {
         ViewBag.Action = "edit";
-        var category = await repository.GetAsync(id ?? 0);
+        var category = await getCategoryUseCase.Get(id ?? 0);
         return await Task.FromResult<IActionResult>(View(category));
     }
     
     [HttpPost]
-    public async Task<IActionResult> Edit([FromForm]Category category)
+    public async Task<IActionResult> Edit([FromForm] CategoryDto categoryDto)
     {
         ViewBag.Action = "edit";
-        await repository.UpdateAsync(category.Id, category);
+        await updateCategoryUseCase.Update(categoryDto);
         return await Task.FromResult<IActionResult>(RedirectToAction(nameof(Index)));
     }
     
     [Route("/categories/delete")]
     public async Task<IActionResult> Delete(int id)
     {
-        await repository.DeleteAsync(id);
+        await deleteCategoryUseCase.Delete(id);
         return RedirectToAction(nameof(Index));
     }
     
@@ -46,11 +46,12 @@ public class CategoriesController(ICategoryRepository repository) : Controller
     
     [HttpPost]
     [Route("/categories/add")]
-    public async Task<IActionResult> Add([FromForm] Category category)
+    public async Task<IActionResult> Add([FromForm] CategoryDto categoryDto)
     {
-        if (!ModelState.IsValid) return View(category);
+        if (!ModelState.IsValid) return View(categoryDto);
         
-        await repository.CreateAsync(category);
+        await createCategoryUseCase.Create(categoryDto);
+        
         return RedirectToAction(nameof(Index));
     }
 }
