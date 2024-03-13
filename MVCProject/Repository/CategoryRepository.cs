@@ -4,7 +4,7 @@ using MVCProject.Models;
 
 namespace MVCProject.Repository;
 
-public class CategoryRepository(CategoriesContext dbContext) : ICategoryRepository
+public class CategoryRepository(SupermarketContext dbContext) : ICategoryRepository
 {
     public async Task CreateAsync(Category category)
     {

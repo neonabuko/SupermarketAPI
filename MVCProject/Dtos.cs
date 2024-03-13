@@ -8,6 +8,12 @@ public record CategoryDto(
     string? Description
     );
 
+public record ProductDto(
+    int Id,
+    string Name,
+    decimal Price
+    );
+
 public record CreateCategoryDto(
     [Required] [StringLength(50)] string Name,
     [Required] [StringLength(100)] string Description); 
@@ -15,3 +21,4 @@ public record CreateCategoryDto(
 public record UpdateCategoryDto(
     [Required] [StringLength(50)] string Name,
     [Required] [StringLength(100)] string Description);
+    

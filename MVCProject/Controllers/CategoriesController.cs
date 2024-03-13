@@ -5,20 +5,27 @@ namespace MVCProject.Controllers;
 
 [ApiController]
 [Route("/categories")]
-public class CategoriesController(ICreateCategoryUseCase createCategoryUseCase, IDeleteCategoryUseCase deleteCategoryUseCase,
-    IUpdateCategoryUseCase updateCategoryUseCase, IGetCategoryUseCase getCategoryUseCase, IGetAllCategoriesUseCase getAllCategoriesUseCase) : Controller
+public class CategoriesController(
+    ICreateCategoryUseCase createCategory, 
+    IDeleteCategoryUseCase deleteCategory,
+    IUpdateCategoryUseCase updateCategory, 
+    IGetCategoryUseCase getCategory, 
+    IGetAllCategoriesUseCase getAllCategories
+    ) : Controller
 {
+    [HttpGet]
     [Route("/categories/index")]
     public Task<IActionResult> Index()
     {
-        var categories = getAllCategoriesUseCase.GetAll().Result;
+        var categories = getAllCategories.GetAll().Result;
         return Task.FromResult<IActionResult>(View(categories));
     }
     
+    [HttpGet]
     public async Task<IActionResult> Edit(int? id)
     {
         ViewBag.Action = "edit";
-        var category = await getCategoryUseCase.Get(id ?? 0);
+        var category = await getCategory.Get(id ?? 0);
         return await Task.FromResult<IActionResult>(View(category));
     }
     
@@ -26,17 +33,19 @@ public class CategoriesController(ICreateCategoryUseCase createCategoryUseCase, 
     public async Task<IActionResult> Edit([FromForm] CategoryDto categoryDto)
     {
         ViewBag.Action = "edit";
-        await updateCategoryUseCase.Update(categoryDto);
+        await updateCategory.Update(categoryDto);
         return await Task.FromResult<IActionResult>(RedirectToAction(nameof(Index)));
     }
     
+    [HttpGet]
     [Route("/categories/delete")]
     public async Task<IActionResult> Delete(int id)
     {
-        await deleteCategoryUseCase.Delete(id);
+        await deleteCategory.Delete(id);
         return RedirectToAction(nameof(Index));
     }
     
+    [HttpGet]
     [Route("/categories/add")]
     public Task<IActionResult> Add()
     {
@@ -50,7 +59,7 @@ public class CategoriesController(ICreateCategoryUseCase createCategoryUseCase, 
     {
         if (!ModelState.IsValid) return View(categoryDto);
         
-        await createCategoryUseCase.Create(categoryDto);
+        await createCategory.Create(categoryDto);
         
         return RedirectToAction(nameof(Index));
     }

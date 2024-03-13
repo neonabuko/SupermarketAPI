@@ -4,9 +4,10 @@ using MVCProject.Models;
 
 namespace MVCProject.Data;
 
-public class CategoriesContext(DbContextOptions<CategoriesContext> options) : DbContext(options)
+public class SupermarketContext(DbContextOptions<SupermarketContext> options) : DbContext(options)
 {
     public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Product> Products => Set<Product>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

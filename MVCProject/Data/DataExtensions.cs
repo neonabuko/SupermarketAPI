@@ -1,7 +1,9 @@
-using System.Configuration;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using MVCProject.Components.Account;
+using MVCProject.Models;
 using MVCProject.Repository;
 using MVCProject.UseCase;
 using MVCProject.UseCase.Interfaces;
@@ -13,17 +15,18 @@ public static class DataExtensions
     public static async Task InitializeDbAsync(this IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<CategoriesContext>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<SupermarketContext>();
         await dbContext.Database.MigrateAsync();
     }
 
-    public static IServiceCollection AddRepositories(
-        this IServiceCollection services,
-        IConfiguration configuration
-    )
+    public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString =  configuration.GetConnectionString("CategoriesContext");
-        services.AddSqlServer<CategoriesContext>(connectionString).AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddSqlServer<SupermarketContext>(connectionString)
+            .AddScoped<ICategoryRepository, CategoryRepository>()
+            .AddScoped<IProductRepository, ProductRepository>();
+
+        services.AddTransient<ICategoriesEmailSender, CategoriesEmailSender>();
         
         services.AddTransient<ICreateCategoryUseCase, CreateCategoryUseCase>();
         services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
@@ -38,10 +41,13 @@ public static class DataExtensions
         services.AddScoped<GetAllCategoriesUseCase>();
         
         services.AddRazorPages();
-        services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<CategoriesContext>()
-            .AddDefaultTokenProviders();
+        
+        services.AddRazorComponents()
+            .AddInteractiveServerComponents();
+        services.AddControllersWithViews();
+        services.AddEndpointsApiExplorer();
 
+        services.AddSwaggerGen();
         return services;
     }
 }

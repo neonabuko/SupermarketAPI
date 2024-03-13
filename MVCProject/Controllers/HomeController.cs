@@ -1,10 +1,13 @@
 using System.Diagnostics;
+
 using Microsoft.AspNetCore.Mvc;
+using MVCProject.Components.Account;
 using MVCProject.Models;
+
 
 namespace MVCProject.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController(ILogger<HomeController> logger, ICategoriesEmailSender emailSender) : Controller
 {
     private readonly ILogger<HomeController> _logger = logger;
 
@@ -15,6 +18,17 @@ public class HomeController(ILogger<HomeController> logger) : Controller
 
     public IActionResult Privacy()
     {
+        return View();
+    }
+
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> Email()
+    {
+        await emailSender.SendEmailAsync("matheusventureli50@gmail.com", "Supermarket", "Hello, world");        
         return View();
     }
 
