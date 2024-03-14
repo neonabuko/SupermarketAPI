@@ -15,10 +15,10 @@ public class CategoriesController(
 {
     [HttpGet]
     [Route("/categories/index")]
-    public Task<IActionResult> Index()
+    public async Task<IActionResult> Index()
     {
-        var categories = getAllCategories.GetAll().Result;
-        return Task.FromResult<IActionResult>(View(categories));
+        var categories = await getAllCategories.GetAll();
+        return await Task.FromResult<IActionResult>(View(categories));
     }
     
     [HttpGet]

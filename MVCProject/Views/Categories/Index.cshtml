@@ -20,7 +20,8 @@
         @foreach (var category in Model)
         {
             <tr>
-                <td> <a class="btn btn-link" asp-controller="Products" asp-action="Index" asp-route-categoryId="@category.Id">@category.Name</a></td>
+                <td> <a class="btn btn-link" asp-controller="Products" asp-action="Index" 
+                        asp-route-categoryName="@category.Name" asp-route-categoryId="@category.Id">@category.Name</a></td>
                 <td>@category.Description</td>
                 <td><a class="btn btn-link" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id">Edit</a></td>
                 <td><a class="btn btn-link" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" onclick="return confirmDelete()">Delete</a></td>

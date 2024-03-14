@@ -21,11 +21,6 @@ public class HomeController(ILogger<HomeController> logger, ICategoriesEmailSend
         return View();
     }
 
-    public IActionResult Login()
-    {
-        return View();
-    }
-
     public async Task<IActionResult> Email()
     {
         await emailSender.SendEmailAsync("matheusventureli50@gmail.com", "Supermarket", "Hello, world");        

@@ -13,4 +13,7 @@ public class Product
     [Required]
     [Range(1, 10000)]
     public required decimal Price { get; set; }
+
+    public int CategoryId { get; set; }
+    public Category? Category { get; set; }
 }

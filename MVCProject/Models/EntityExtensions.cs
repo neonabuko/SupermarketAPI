@@ -8,6 +8,16 @@ public static class EntityExtensions
         return new CategoryDto(
             category.Id,
             category.Name,
-            category.Description);
+            category.Description
+            );
+    }
+
+    public static ProductDto AsDto(this Product product)
+    {
+        return new ProductDto(
+            product.Id,
+            product.Name,
+            product.Price
+        );
     }
 }
