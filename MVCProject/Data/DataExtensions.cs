@@ -6,7 +6,10 @@ using MVCProject.Components.Account;
 using MVCProject.Models;
 using MVCProject.Repository;
 using MVCProject.UseCase;
+using MVCProject.UseCase.CategoriesUseCase;
 using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.ProductsUseCase;
+using MVCProject.UseCase.ProductsUseCase.Interfaces;
 
 namespace MVCProject.Data;
 
@@ -33,12 +36,24 @@ public static class DataExtensions
         services.AddTransient<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
         services.AddTransient<IGetCategoryUseCase, GetCategoryUseCase>();
         services.AddTransient<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
+        services.AddTransient<IGetAllProductsUseCase, GetAllProductsUseCase>();
+        services.AddTransient<IGetProductUseCase, GetProductUseCase>();
+        services.AddTransient<ICreateProductUseCase, CreateProductUseCase>();
+        services.AddTransient<IUpdateProductUseCase, UpdateProductUseCase>();
+        services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
+        services.AddTransient<IGetAllProductsInCategoryUseCase, GetAllProductsInCategoryUseCase>();
         
         services.AddScoped<CreateCategoryUseCase>();
         services.AddScoped<DeleteCategoryUseCase>();
         services.AddScoped<UpdateCategoryUseCase>();
         services.AddScoped<GetCategoryUseCase>();
         services.AddScoped<GetAllCategoriesUseCase>();
+        services.AddScoped<GetAllProductsUseCase>();
+        services.AddScoped<GetProductUseCase>();
+        services.AddScoped<CreateProductUseCase>();
+        services.AddScoped<UpdateProductUseCase>();
+        services.AddScoped<DeleteProductUseCase>();
+        services.AddScoped<GetAllProductsInCategoryUseCase>();
         
         services.AddRazorPages();
         

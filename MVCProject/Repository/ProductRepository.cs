@@ -22,7 +22,7 @@ public class ProductRepository(SupermarketContext context) : IProductRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task Update(int id, Product product)
+    public async Task UpdateAsync(int id, Product product)
     {
         var toUpdate = await context.Products.FindAsync(id);
         if (toUpdate != null)
@@ -35,7 +35,7 @@ public class ProductRepository(SupermarketContext context) : IProductRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task Delete(int id)
+    public async Task DeleteAsync(int id)
     {
         await context.Products.Where(product => product.Id == id).ExecuteDeleteAsync();
     }

@@ -1,8 +1,7 @@
-using MVCProject.Models;
 using MVCProject.Repository;
 using MVCProject.UseCase.Interfaces;
 
-namespace MVCProject.UseCase;
+namespace MVCProject.UseCase.CategoriesUseCase;
 
 public class UpdateCategoryUseCase(ICategoryRepository categoryRepository) : IUpdateCategoryUseCase
 {

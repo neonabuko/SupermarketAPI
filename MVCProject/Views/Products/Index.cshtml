@@ -20,8 +20,13 @@
         @foreach (var product in Model)
         {
             <tr>
-                <td><a class="btn btn-link" asp-controller="Categories" asp-action="Edit" asp-route-id="@product.Id">@product.Name</a></td>
-                <td><a class="btn btn-link" asp-controller="Categories" asp-action="Delete" asp-route-id="@product.Id">@product.Price</a></td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>                
+                <td><a class="btn btn-link" asp-controller="Products" asp-action="Edit" asp-route-productId="@product.Id"
+                    asp-route-categoryId="@ViewData["CategoryId"]" asp-route-categoryName="@ViewData["CategoryName"]"
+                       >Edit</a></td>
+                <td><a class="btn btn-link" asp-controller="Products" asp-action="Delete" asp-route-productId="@product.Id"
+                       asp-route-categoryId="@ViewData["CategoryId"]" asp-route-categoryName="@ViewData["CategoryName"]" onclick="confirmDelete()">Delete</a></td>
             </tr>
         }
         </tbody>
@@ -31,3 +36,12 @@
 
 <a class="btn btn-primary" asp-controller="Products" asp-action="Add" asp-route-categoryName="@ViewData["CategoryName"]"
    asp-route-categoryId="@ViewData["CategoryId"]">Add</a>
+
+@section Scripts
+{
+    <script>
+        function confirmDelete() {
+            return confirm("Delete this product?")    
+        }
+    </script>
+}

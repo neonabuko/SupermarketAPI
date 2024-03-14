@@ -2,7 +2,7 @@ using MVCProject.Models;
 using MVCProject.Repository;
 using MVCProject.UseCase.Interfaces;
 
-namespace MVCProject.UseCase;
+namespace MVCProject.UseCase.CategoriesUseCase;
 
 public class CreateCategoryUseCase(ICategoryRepository categoryRepository) : ICreateCategoryUseCase
 {
