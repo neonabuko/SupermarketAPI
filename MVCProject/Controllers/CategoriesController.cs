@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MVCProject.Repository;
-using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
 namespace MVCProject.Controllers;
 

@@ -1,5 +1,5 @@
 using MVCProject.Repository;
-using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
 namespace MVCProject.UseCase.CategoriesUseCase;
 

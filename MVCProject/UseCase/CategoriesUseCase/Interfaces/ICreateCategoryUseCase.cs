@@ -1,4 +1,4 @@
-namespace MVCProject.UseCase.Interfaces;
+namespace MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
 public interface ICreateCategoryUseCase
 {

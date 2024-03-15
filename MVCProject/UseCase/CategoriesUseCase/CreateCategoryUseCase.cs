@@ -1,6 +1,6 @@
 using MVCProject.Models;
 using MVCProject.Repository;
-using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
 namespace MVCProject.UseCase.CategoriesUseCase;
 
@@ -11,7 +11,8 @@ public class CreateCategoryUseCase(ICategoryRepository categoryRepository) : ICr
         Category category = new()
         {
             Name = categoryDto.Name,
-            Description = categoryDto.Description
+            Description = categoryDto.Description,
+            Products = new List<Product>()
         };
 
         await categoryRepository.CreateAsync(category);

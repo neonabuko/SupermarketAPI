@@ -9,7 +9,6 @@ namespace MVCProject.Controllers;
 [Route("/products")]
 public class ProductsController(
     IGetProductUseCase getProductUseCase,
-    IGetAllProductsUseCase getAllProductsUseCase,
     IGetAllProductsInCategoryUseCase getAllProductsInCategoryUseCase,
     ICreateProductUseCase createProductUseCase,
     IUpdateProductUseCase updateProductUseCase,
@@ -24,6 +23,14 @@ public class ProductsController(
         ViewData["CategoryName"] = categoryName;
         ViewData["CategoryId"] = categoryId;
         return View(products);
+    }
+
+    [HttpGet]
+    [Route("/products/get-products/{categoryId:int}")]
+    public async Task<ICollection<ProductDto>> GetProducts(int categoryId)
+    {
+        var products = await getAllProductsInCategoryUseCase.GetAllAsync(categoryId);
+        return products;
     }
 
     [HttpGet]

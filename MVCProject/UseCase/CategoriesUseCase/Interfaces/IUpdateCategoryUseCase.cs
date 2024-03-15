@@ -1,6 +1,4 @@
-using MVCProject.Models;
-
-namespace MVCProject.UseCase.Interfaces;
+namespace MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
 public interface IUpdateCategoryUseCase
 {

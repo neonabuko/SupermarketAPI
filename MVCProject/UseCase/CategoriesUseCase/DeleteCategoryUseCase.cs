@@ -1,7 +1,7 @@
 using MVCProject.Repository;
-using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
-namespace MVCProject.UseCase;
+namespace MVCProject.UseCase.CategoriesUseCase;
 
 public class DeleteCategoryUseCase(ICategoryRepository categoryRepository, IProductRepository productRepository) : IDeleteCategoryUseCase
 {

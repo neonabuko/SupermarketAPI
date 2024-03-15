@@ -12,6 +12,7 @@ public class SupermarketContext(DbContextOptions<SupermarketContext> options) : 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        
         builder.Entity<Product>()
             .HasOne(p => p.Category)
             .WithMany(c => c.Products)

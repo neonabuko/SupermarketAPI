@@ -7,7 +7,7 @@ using MVCProject.Models;
 using MVCProject.Repository;
 using MVCProject.UseCase;
 using MVCProject.UseCase.CategoriesUseCase;
-using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.CategoriesUseCase.Interfaces;
 using MVCProject.UseCase.ProductsUseCase;
 using MVCProject.UseCase.ProductsUseCase.Interfaces;
 

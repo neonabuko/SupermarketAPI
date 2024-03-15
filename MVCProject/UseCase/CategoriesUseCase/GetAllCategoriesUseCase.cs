@@ -1,8 +1,8 @@
 using MVCProject.Models;
 using MVCProject.Repository;
-using MVCProject.UseCase.Interfaces;
+using MVCProject.UseCase.CategoriesUseCase.Interfaces;
 
-namespace MVCProject.UseCase;
+namespace MVCProject.UseCase.CategoriesUseCase;
 
 public class GetAllCategoriesUseCase(ICategoryRepository categoryRepository) : IGetAllCategoriesUseCase
 {
